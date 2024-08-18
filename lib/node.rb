@@ -9,6 +9,8 @@ class Node
   end
 
   def <=>(other)
+    return data <=> other if other.is_a? Numeric
+
     data <=> other.data
   end
 end
