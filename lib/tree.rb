@@ -15,11 +15,12 @@ class Tree
       return node.right_child = Node.new(value) if leaf?(node)
 
       insert(value, node.right_child)
-    else
+    elsif node > value
       return node.left_child = Node.new(value) if leaf?(node)
 
       insert(value, node.left_child)
     end
+    nil
   end
 
   def find(value, node = @root)
