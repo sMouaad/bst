@@ -13,4 +13,8 @@ class Node
 
     data <=> other.data
   end
+
+  def leaf?
+    left_child.nil? && right_child.nil?
+  end
 end
