@@ -23,6 +23,31 @@ class Tree
     nil
   end
 
+  def delete(value, node = @root)
+    return node if node.nil?
+
+    if node < value
+      node.right_child = delete(value, node.right_child)
+    elsif node > value
+      node.left_child = delete(value, node.left_child)
+    else
+      return node.right_child if node.left_child.nil?
+      return node.left_child if node.right_child.nil?
+
+      # When both children are present
+      succ = get_successor(node)
+      node.value = succ.value
+      node.right_child = delete(node.right_child, succ.value)
+    end
+    node
+  end
+
+  def get_successor(node)
+    node = node.right
+    node = node.left_child until node.nil? || node.left_child.nil?
+    node
+  end
+
   def find(value, node = @root)
     return node if node.nil? || node == value
 
@@ -55,4 +80,6 @@ tree.pretty_print
 tree.insert(6)
 tree.pretty_print
 tree.insert(68)
+tree.pretty_print
+tree.delete(68)
 tree.pretty_print
