@@ -22,6 +22,16 @@ class Tree
     end
   end
 
+  def find(value, node = @root)
+    return node if node.nil? || node == value
+
+    if node < value
+      find(value, node.right_child)
+    else
+      find(value, node.left_child)
+    end
+  end
+
   def leaf?(node)
     node.left_child.nil? && node.right_child.nil?
   end
